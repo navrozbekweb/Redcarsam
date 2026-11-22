@@ -1,0 +1,95 @@
+/* ==========================================================
+   RED CAR — qo'shimcha uslublar
+   Asosiy dizayn Bootstrap 5 tomonidan beriladi.
+   Bu yerda faqat Bootstrap'da yo'q kichik narsalar bor.
+   ========================================================== */
+
+/* Asosiy rang (Bootstrap'ning "danger" rangini brend rangiga moslaymiz) */
+:root {
+    --bs-danger: #ff285d;
+    --bs-danger-rgb: 255, 40, 93;
+    --bs-link-hover-color: #ff285d;
+}
+
+body {
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    padding-top: 66px;          /* fixed-top menyu tagida qolib ketmasligi uchun */
+}
+
+html { scroll-behavior: smooth; }
+
+/* Sarlavhaga o'tganda menyu ustini yopib qo'ymasligi uchun */
+section[id] { scroll-margin-top: 70px; }
+
+::selection { background: #e50914; color: #fff; }
+
+/* Logotip uchun juda qalin shrift */
+.fw-black { font-weight: 900; }
+
+/* ---------- HERO ---------- */
+.hero-section {
+    padding: 60px 0;
+    background:
+        radial-gradient(ellipse at 75% 70%, rgba(255, 40, 93, .18), transparent 45%),
+        linear-gradient(110deg, #0a0a0e, #17151e 70%, #09090d);
+}
+
+/* Slayder rasmlari bir xil balandlikda bo'lsin */
+.slide-img {
+    height: 320px;
+    object-fit: contain;
+    background: #111116;
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, .55);
+    border-radius: 10px;
+    padding: 6px 14px;
+    left: 10%;
+    right: 10%;
+    bottom: 36px;
+}
+
+/* ---------- AVTOMOBIL KARTOCHKALARI ---------- */
+.car-img {
+    height: 200px;
+    object-fit: contain;
+    background: #111116;
+}
+
+.car-card {
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.car-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--bs-danger);
+    box-shadow: 0 10px 25px rgba(255, 40, 93, .22);
+}
+
+/* ---------- RASM TURLARI ---------- */
+.avatar-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+/* ---------- TEPAGA QAYTISH ---------- */
+.to-top {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    z-index: 1030;
+}
+
+/* ---------- MOBIL QURILMALAR ---------- */
+@media (max-width: 576px) {
+    .slide-img { height: 220px; }
+    .car-img   { height: 170px; }
+    .hero-section { padding: 35px 0; }
+}

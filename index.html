@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<!--
+    RED CAR | Samarqand — avtomobil ijarasi veb tizimi
+    2-mustaqil ish: Bootstrap 5.3 yordamida rivojlantirilgan versiya.
+
+    Kod ichidagi izohlar baholash jadvalidagi band raqamlariga mos:
+    [1]  Responsive (moslashuvchan) grid
+    [2]  Matnlarga dizayn
+    [3]  Jadval va ro'yxatlar
+    [4]  Formalar
+    [5]  Media fayllar va Bootstrap Icons
+    [6]  Dropdown va tugmali dropdown
+    [7]  Konteynerli menyu (navbar)
+    [8]  Tooltip va popover
+    [9]  Panel (Card, Accordion)
+    [10] Slayder (Carousel)
+-->
+<html lang="uz" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <!-- [1] Qurilma ekraniga moslashish uchun viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RED CAR | Samarqand</title>
+
+    <!-- Bootstrap 5.3 CSS va Bootstrap Icons (CDN orqali, internet kerak) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Bizning qo'shimcha (kichik) uslublar -->
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<!-- Scrollspy: sahifani aylantirganda menyudagi tegishli havola yonib turadi -->
+<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="90" tabindex="0">
+
+<!-- ====================================================== -->
+<!-- [7] KONTEYNERLI MENYU (navbar + container)             -->
+<!-- ====================================================== -->
+<nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary border-bottom border-danger-subtle" id="mainNav">
+    <div class="container"><!-- container: menyu mazmunini markazga joylaydi -->
+
+        <a class="navbar-brand fw-black" href="#home">
+            <i class="bi bi-car-front-fill text-danger"></i> RED<span class="text-danger">CAR</span>
+        </a>
+
+        <!-- Mobil qurilmada menyuni ochadigan tugma -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Menyuni ochish">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="#home">Bosh sahifa</a></li>
+                <li class="nav-item"><a class="nav-link" href="#cars">Avtomobillar</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">Biz haqimizda</a></li>
+                <li class="nav-item"><a class="nav-link" href="#prices">Narxlar</a></li>
+
+                <!-- [6] Menyu ichidagi dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Yana
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#media"><i class="bi bi-play-circle me-2"></i>Media</a></li>
+                        <li><a class="dropdown-item" href="#location"><i class="bi bi-geo-alt me-2"></i>Manzil</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#faq"><i class="bi bi-question-circle me-2"></i>Savol-javob</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <a class="btn btn-danger" href="#booking">
+                <i class="bi bi-calendar-check me-1"></i> Bron qilish
+            </a>
+        </div>
+    </div>
+</nav>
+
+<main>
+
+<!-- ====================================================== -->
+<!-- BOSH SAHIFA (hero) = matn + [10] slayder               -->
+<!-- ====================================================== -->
+<section class="hero-section" id="home">
+    <div class="container">
+        <!-- [1] row + col: telefonda 1 ustun, kompyuterda 2 ustun -->
+        <div class="row align-items-center g-4">
+
+            <!-- Chap tomon: matn -->
+            <div class="col-12 col-lg-6">
+                <!-- [2] Matn dizayni: small, display-*, lead, text-*, fw-* klasslari -->
+                <p class="text-danger fw-bold text-uppercase small mb-2">
+                    <i class="bi bi-circle-fill me-1" style="font-size:.5rem"></i> Samarqandda avtomobil ijarasi
+                </p>
+                <h1 class="display-3 fw-bolder">
+                    Safaringizni biz bilan <span class="text-danger">boshlang!</span>
+                </h1>
+                <p class="lead text-body-secondary">
+                    Zamonaviy avtomobillar, qulay xizmat va ishonchli ijara — barchasi bir joyda.
+                </p>
+
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                    <a href="#cars" class="btn btn-danger btn-lg">
+                        Avtomobillarni ko‘rish <i class="bi bi-arrow-right"></i>
+                    </a>
+                    <a href="#media" class="btn btn-outline-light btn-lg">
+                        <i class="bi bi-play-fill"></i> Video ko‘rish
+                    </a>
+                </div>
+
+                <!-- Statistika: row-cols orqali 3 ta teng ustun -->
+                <div class="row row-cols-3 text-center text-sm-start g-2">
+                    <div class="col"><div class="fs-3 fw-bold">6+</div><small class="text-body-secondary">Avtomobil turi</small></div>
+                    <div class="col"><div class="fs-3 fw-bold">24/7</div><small class="text-body-secondary">Murojaat uchun</small></div>
+                    <div class="col"><div class="fs-3 fw-bold">100%</div><small class="text-body-secondary">Qulay xizmat</small></div>
+                </div>
+            </div>
+
+            <!-- O'ng tomon: [10] SLAYDER (Bootstrap Carousel) -->
+            <div class="col-12 col-lg-6">
+                <div id="heroCarousel" class="carousel slide carousel-fade shadow-lg rounded-4 overflow-hidden"
+                     data-bs-ride="carousel">
+
+                    <!-- Pastdagi nuqtalar (indikatorlar) -->
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="1-slayd"></button>
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="2-slayd"></button>
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="3-slayd"></button>
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="4-slayd"></button>
+                    </div>
+
+                    <!-- Slaydlar -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" data-bs-interval="4000">
+                            <img src="images/kia-k5.png" class="d-block w-100 slide-img" alt="Kia K5">
+                            <div class="carousel-caption">
+                                <h5>Kia K5</h5><p class="mb-0">Premium sinf · 650 000 so‘m/kun</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="4000">
+                            <img src="images/malibu.jpg" class="d-block w-100 slide-img" alt="Chevrolet Malibu">
+                            <div class="carousel-caption">
+                                <h5>Chevrolet Malibu</h5><p class="mb-0">Premium sinf · 750 000 so‘m/kun</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="4000">
+                            <img src="images/tracker.jpg" class="d-block w-100 slide-img" alt="Chevrolet Tracker">
+                            <div class="carousel-caption">
+                                <h5>Chevrolet Tracker</h5><p class="mb-0">Krossover · 500 000 so‘m/kun</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="4000">
+                            <img src="images/equinox.jpg" class="d-block w-100 slide-img" alt="Chevrolet Equinox">
+                            <div class="carousel-caption">
+                                <h5>Chevrolet Equinox</h5><p class="mb-0">Krossover · 800 000 so‘m/kun</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Oldingi / keyingi tugmalar -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Oldingi</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Keyingi</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- AVTOPARK: qidiruv ([4] forma + [6] dropdown) va         -->
+<!-- [9] card (panel) kartochkalari                          -->
+<!-- ====================================================== -->
+<section class="py-5" id="cars">
+    <div class="container">
+
+        <div class="text-center mb-4">
+            <p class="text-danger fw-bold text-uppercase small mb-1">Bizning avtopark</p>
+            <h2 class="fw-bold">O‘zingizga mos avtomobilni <span class="text-danger">tanlang</span></h2>
+            <p class="text-body-secondary">Har qanday safar uchun qulay avtomobillar.</p>
+        </div>
+
+        <!-- Qidiruv paneli -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row g-2 align-items-center">
+
+                    <!-- [4] input-group: ikonka + qidiruv maydoni -->
+                    <div class="col-12 col-md-5">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-search"></i></span>
+                            <input type="search" class="form-control" id="searchInput"
+                                   placeholder="Avtomobil nomini qidiring...">
+                        </div>
+                    </div>
+
+                    <!-- [4] form-select: toifa bo'yicha filtr -->
+                    <div class="col-6 col-md-3">
+                        <select class="form-select" id="typeFilter" aria-label="Toifa">
+                            <option value="all">Barcha toifalar</option>
+                            <option value="sedan">Sedan</option>
+                            <option value="crossover">Krossover</option>
+                            <option value="premium">Premium</option>
+                        </select>
+                    </div>
+
+                    <!-- [6] TUGMALI DROPDOWN: narx bo'yicha saralash -->
+                    <div class="col-6 col-md-4">
+                        <div class="btn-group w-100">
+                            <button type="button" class="btn btn-outline-light" id="sortLabel">
+                                <i class="bi bi-sort-down"></i> Narx bo‘yicha
+                            </button>
+                            <button type="button" class="btn btn-outline-light dropdown-toggle dropdown-toggle-split"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="visually-hidden">Saralash menyusi</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item sort-item" href="#" data-sort="default">Odatiy tartib</a></li>
+                                <li><a class="dropdown-item sort-item" href="#" data-sort="low">Arzondan qimmatga</a></li>
+                                <li><a class="dropdown-item sort-item" href="#" data-sort="high">Qimmatdan arzonga</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- [1] Kartochkalar to'ri: telefonda 1, planshetda 2, kompyuterda 3 ta -->
+        <div class="row g-4" id="carGrid">
+
+            <!-- Har bir avtomobil: data-* atributlari JavaScript filtr uchun -->
+            <div class="col-12 col-md-6 col-lg-4 car-col" data-name="kia k5" data-type="premium" data-price="650000">
+                <!-- [9] CARD = Bootstrap panel -->
+                <div class="card h-100 car-card">
+                    <span class="badge text-bg-danger position-absolute top-0 end-0 m-2">Premium</span>
+                    <!-- [5] img-fluid: rasm ekranga moslashadi -->
+                    <img src="images/kia-k5.png" class="card-img-top car-img img-fluid" alt="Kia K5">
+                    <div class="card-body">
+                        <h5 class="card-title">Kia K5</h5>
+                        <p class="card-text text-body-secondary small">2025 · 5 o‘rin · Avtomat</p>
+                        <p class="fs-5 fw-bold text-danger mb-0">650 000 <small class="text-body-secondary fw-normal fs-6">so‘m/kun</small></p>
+                    </div>
+                    <div class="card-footer d-flex gap-2">
+                        <button class="btn btn-danger btn-sm flex-fill car-book" data-car="Kia K5">
+                            <i class="bi bi-calendar-plus"></i> Bron qilish
+                        </button>
+                        <!-- [8] POPOVER: bosilganda kichik oyna ochiladi -->
+                        <button type="button" class="btn btn-outline-light btn-sm"
+                                data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                data-bs-title="Kia K5 haqida"
+                                data-bs-content="Premium sedan: konditsioner, kamera, avtomat uzatma. Yoqilg‘i: benzin.">
+                            <i class="bi bi-info-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 car-col" data-name="chevrolet malibu" data-type="premium" data-price="750000">
+                <div class="card h-100 car-card">
+                    <span class="badge text-bg-danger position-absolute top-0 end-0 m-2">Premium</span>
+                    <img src="images/malibu.jpg" class="card-img-top car-img img-fluid" alt="Chevrolet Malibu">
+                    <div class="card-body">
+                        <h5 class="card-title">Chevrolet Malibu</h5>
+                        <p class="card-text text-body-secondary small">2024 · 5 o‘rin · Avtomat</p>
+                        <p class="fs-5 fw-bold text-danger mb-0">750 000 <small class="text-body-secondary fw-normal fs-6">so‘m/kun</small></p>
+                    </div>
+                    <div class="card-footer d-flex gap-2">
+                        <button class="btn btn-danger btn-sm flex-fill car-book" data-car="Chevrolet Malibu">
+                            <i class="bi bi-calendar-plus"></i> Bron qilish
+                        </button>
+                        <button type="button" class="btn btn-outline-light btn-sm"
+                                data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                data-bs-title="Chevrolet Malibu haqida"
+                                data-bs-content="Keng salonli premium sedan: charm o‘rindiqlar, iqlim nazorati, yumshoq yurish.">
+                            <i class="bi bi-info-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 car-col" data-name="chevrolet cobalt" data-type="sedan" data-price="350000">
+                <div class="card h-100 car-card">
+                    <span class="badge text-bg-primary position-absolute top-0 end-0 m-2">Sedan</span>
+                    <img src="images/cobalt.jpg" class="card-img-top car-img img-fluid" alt="Chevrolet Cobalt">
+                    <div class="card-body">
+                        <h5 class="card-title">Chevrolet Cobalt</h5>
+                        <p class="card-text text-body-secondary small">2024 · 5 o‘rin · Avtomat</p>
+                        <p class="fs-5 fw-bold text-danger mb-0">350 000 <small class="text-body-secondary fw-normal fs-6">so‘m/kun</small></p>
+                    </div>
+                    <div class="card-footer d-flex gap-2">
+                        <button class="btn btn-danger btn-sm flex-fill car-book" data-car="Chevrolet Cobalt">
+                            <i class="bi bi-calendar-plus"></i> Bron qilish
+                        </button>
+                        <button type="button" class="btn btn-outline-light btn-sm"
+                                data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                data-bs-title="Chevrolet Cobalt haqida"
+                                data-bs-content="Tejamkor va ishonchli sedan. Shahar ichida va yaqin safarlar uchun ideal.">
+                            <i class="bi bi-info-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 car-col" data-name="chevrolet tracker" data-type="crossover" data-price="500000">
+                <div class="card h-100 car-card">
+                    <span class="badge text-bg-danger position-absolute top-0 end-0 m-2">Krossover</span>
+                    <img src="images/tracker.jpg" class="card-img-top car-img img-fluid" alt="Chevrolet Tracker">
+                    <div class="card-body">
+                        <h5 class="card-title">Chevrolet Tracker</h5>
+                        <p class="card-text text-body-secondary small">2024 · 5 o‘rin · Avtomat</p>
+                        <p class="fs-5 fw-bold text-danger mb-0">500 000 <small class="text-body-secondary fw-normal fs-6">so‘m/kun</small></p>
+                    </div>
+                    <div class="card-footer d-flex gap-2">
+                        <button class="btn btn-danger btn-sm flex-fill car-book" data-car="Chevrolet Tracker">
+                            <i class="bi bi-calendar-plus"></i> Bron qilish
+                        </button>
+                        <button type="button" class="btn btn-outline-light btn-sm"
+                                data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                data-bs-title="Chevrolet Tracker haqida"
+                                data-bs-content="Ixcham krossover: baland o‘tirish, katta yukxona, tog‘ va shahar yo‘llari uchun mos.">
+                            <i class="bi bi-info-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 car-col" data-name="chevrolet onix" data-type="sedan" data-price="400000">
+                <div class="card h-100 car-card">
+                    <span class="badge text-bg-primary position-absolute top-0 end-0 m-2">Sedan</span>
+                    <img src="images/onix.jpg" class="card-img-top car-img img-fluid" alt="Chevrolet Onix">
+                    <div class="card-body">
+                        <h5 class="card-title">Chevrolet Onix</h5>
+                        <p class="card-text text-body-secondary small">2025 · 5 o‘rin · Avtomat</p>
+                        <p class="fs-5 fw-bold text-danger mb-0">400 000 <small class="text-body-secondary fw-normal fs-6">so‘m/kun</small></p>
+                    </div>
+                    <div class="card-footer d-flex gap-2">
+                        <button class="btn btn-danger btn-sm flex-fill car-book" data-car="Chevrolet Onix">
+                            <i class="bi bi-calendar-plus"></i> Bron qilish
+                        </button>
+                        <button type="button" class="btn btn-outline-light btn-sm"
+                                data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                data-bs-title="Chevrolet Onix haqida"
+                                data-bs-content="Zamonaviy dizayndagi yangi sedan. Kam yoqilg‘i sarfi va qulay boshqaruv.">
+                            <i class="bi bi-info-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 car-col" data-name="chevrolet equinox" data-type="crossover" data-price="800000">
+                <div class="card h-100 car-card">
+                    <span class="badge text-bg-danger position-absolute top-0 end-0 m-2">Krossover</span>
+                    <img src="images/equinox.jpg" class="card-img-top car-img img-fluid" alt="Chevrolet Equinox">
+                    <div class="card-body">
+                        <h5 class="card-title">Chevrolet Equinox</h5>
+                        <p class="card-text text-body-secondary small">2024 · 5 o‘rin · Avtomat</p>
+                        <p class="fs-5 fw-bold text-danger mb-0">800 000 <small class="text-body-secondary fw-normal fs-6">so‘m/kun</small></p>
+                    </div>
+                    <div class="card-footer d-flex gap-2">
+                        <button class="btn btn-danger btn-sm flex-fill car-book" data-car="Chevrolet Equinox">
+                            <i class="bi bi-calendar-plus"></i> Bron qilish
+                        </button>
+                        <button type="button" class="btn btn-outline-light btn-sm"
+                                data-bs-toggle="popover" data-bs-trigger="focus" data-bs-placement="top"
+                                data-bs-title="Chevrolet Equinox haqida"
+                                data-bs-content="Katta oilaviy krossover: keng salon, kuchli dvigatel, uzoq safarlar uchun qulay.">
+                            <i class="bi bi-info-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hech narsa topilmasa chiqadigan xabar (Bootstrap alert) -->
+        <div class="alert alert-warning mt-4 d-none" id="noResults" role="alert">
+            <i class="bi bi-exclamation-triangle me-1"></i> Avtomobil topilmadi.
+        </div>
+    </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- BIZ HAQIMIZDA: [2] matn dizayni + [3] ro'yxatlar        -->
+<!-- ====================================================== -->
+<section class="py-5 bg-body-tertiary" id="about">
+    <div class="container">
+        <div class="row g-5">
+
+            <!-- [2] MATN DIZAYNI -->
+            <div class="col-12 col-lg-6">
+                <p class="text-danger fw-bold text-uppercase small mb-1">Biz haqimizda</p>
+                <h2 class="fw-bold">Yo‘lda ishonch va <span class="text-danger">qulaylik</span></h2>
+
+                <p class="lead">
+                    <strong>RED CAR</strong> — Samarqandda avtomobil ijarasi xizmatini qulay tashkil etish loyihasi.
+                </p>
+                <p class="text-body-secondary">
+                    Turli toifadagi avtomobillarni tanlang va oldindan band qiling. Narxlar
+                    <mark>kunlik</mark> hisobda, <del>yashirin to‘lovlarsiz</del>
+                    <ins>shaffof shartlar bilan</ins>.
+                </p>
+
+                <!-- Blockquote: iqtibos -->
+                <blockquote class="blockquote border-start border-danger border-4 ps-3 my-4">
+                    <p class="fst-italic">“Yaxshi safar — to‘g‘ri tanlangan avtomobildan boshlanadi.”</p>
+                    <footer class="blockquote-footer">RED CAR jamoasi</footer>
+                </blockquote>
+
+                <!-- Boshqa matn utility'lari -->
+                <p class="mb-1"><span class="fw-bold">Qalin</span>, <span class="fst-italic">qiya</span>,
+                    <span class="text-decoration-underline">tagiga chizilgan</span>,
+                    <span class="text-uppercase">katta harf</span>,
+                    <span class="text-danger">qizil</span>,
+                    <span class="text-success">yashil</span> matn.</p>
+                <p><small class="text-body-secondary">Bu kichik (small) va xira (muted) matn.</small></p>
+            </div>
+
+            <!-- [3] RO'YXATLAR -->
+            <div class="col-12 col-lg-6">
+                <h3 class="h5 fw-bold mb-3">Bizning afzalliklarimiz</h3>
+
+                <!-- list-group + Bootstrap ikonkalari -->
+                <ul class="list-group mb-4">
+                    <li class="list-group-item"><i class="bi bi-check-circle-fill text-danger me-2"></i>Yangi va zamonaviy avtomobillar</li>
+                    <li class="list-group-item"><i class="bi bi-check-circle-fill text-danger me-2"></i>Qulay va hamyonbop ijara narxlari</li>
+                    <li class="list-group-item"><i class="bi bi-check-circle-fill text-danger me-2"></i>Haydovchili va haydovchisiz ijara</li>
+                    <li class="list-group-item"><i class="bi bi-check-circle-fill text-danger me-2"></i>24/7 mijozlarni qo‘llab-quvvatlash</li>
+                </ul>
+
+                <h3 class="h5 fw-bold mb-3">Avtomobil ijarasi tartibi</h3>
+                <!-- Raqamlangan list-group -->
+                <ol class="list-group list-group-numbered">
+                    <li class="list-group-item">Kerakli avtomobilni tanlang.</li>
+                    <li class="list-group-item">Buyurtma formasini to‘ldiring.</li>
+                    <li class="list-group-item">Ijara shartlarini kelishib oling.</li>
+                    <li class="list-group-item">Avtomobilni qabul qilib oling.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Xizmatlar: [9] card + [8] tooltip -->
+        <div class="row g-3 mt-4" id="services">
+            <div class="col-12 col-md-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <!-- [8] TOOLTIP: sichqoncha ustiga kelganda yozuv chiqadi -->
+                        <i class="bi bi-car-front display-4 text-danger"
+                           data-bs-toggle="tooltip" data-bs-title="Mustaqil sayohat uchun"></i>
+                        <h5 class="card-title mt-2">O‘zingiz haydang</h5>
+                        <p class="card-text text-body-secondary small">Mustaqil sayohat uchun.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="bi bi-person-badge display-4 text-danger"
+                           data-bs-toggle="tooltip" data-bs-title="Tajribali haydovchi bilan"></i>
+                        <h5 class="card-title mt-2">Haydovchi bilan</h5>
+                        <p class="card-text text-body-secondary small">Tajribali haydovchi xizmati.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <i class="bi bi-calendar2-check display-4 text-danger"
+                           data-bs-toggle="tooltip" data-bs-title="Sana bo‘yicha buyurtma"></i>
+                        <h5 class="card-title mt-2">Oldindan bron</h5>
+                        <p class="card-text text-body-secondary small">Sana bo‘yicha buyurtma.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- [3] JADVAL                                              -->
+<!-- ====================================================== -->
+<section class="py-5" id="prices">
+    <div class="container">
+        <p class="text-danger fw-bold text-uppercase small mb-1">Narxlar</p>
+        <h2 class="fw-bold mb-3">Ijara narxlari <span class="text-danger">jadvali</span></h2>
+
+        <!-- table-responsive: kichik ekranda jadval yon tomonga suriladi -->
+        <div class="table-responsive">
+            <table class="table table-dark table-striped table-hover table-bordered align-middle">
+                <caption>Narxlar namuna sifatida kiritilgan.</caption>
+                <thead class="table-danger">
+                    <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Avtomobil</th>
+                        <th scope="col">Toifa</th>
+                        <th scope="col">Yili</th>
+                        <th scope="col">O‘rin</th>
+                        <th scope="col">Kunlik narx</th>
+                        <th scope="col">Holat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><th scope="row">1</th><td>Kia K5</td><td>Premium</td><td>2025</td><td>5</td><td>650 000 so‘m</td><td><span class="badge text-bg-success">Mavjud</span></td></tr>
+                    <tr><th scope="row">2</th><td>Chevrolet Malibu</td><td>Premium</td><td>2024</td><td>5</td><td>750 000 so‘m</td><td><span class="badge text-bg-success">Mavjud</span></td></tr>
+                    <tr><th scope="row">3</th><td>Chevrolet Cobalt</td><td>Sedan</td><td>2024</td><td>5</td><td>350 000 so‘m</td><td><span class="badge text-bg-success">Mavjud</span></td></tr>
+                    <tr><th scope="row">4</th><td>Chevrolet Tracker</td><td>Krossover</td><td>2024</td><td>5</td><td>500 000 so‘m</td><td><span class="badge text-bg-warning">Band</span></td></tr>
+                    <tr><th scope="row">5</th><td>Chevrolet Onix</td><td>Sedan</td><td>2025</td><td>5</td><td>400 000 so‘m</td><td><span class="badge text-bg-success">Mavjud</span></td></tr>
+                    <tr><th scope="row">6</th><td>Chevrolet Equinox</td><td>Krossover</td><td>2024</td><td>5</td><td>800 000 so‘m</td><td><span class="badge text-bg-success">Mavjud</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- [4] BRON FORMASI                                        -->
+<!-- ====================================================== -->
+<section class="py-5 bg-body-tertiary" id="booking">
+    <div class="container">
+        <div class="row g-4 align-items-start">
+
+            <div class="col-12 col-lg-4">
+                <p class="text-danger fw-bold text-uppercase small mb-1">Bron qilish</p>
+                <h2 class="fw-bold">Keyingi manzilingizga biz bilan <span class="text-danger">boring</span></h2>
+                <p class="text-body-secondary">Formani to‘ldiring, operatorimiz siz bilan bog‘lanadi.</p>
+
+                <!-- [6] Tugmali dropdown: boshqa bog'lanish usullari -->
+                <div class="btn-group">
+                    <a href="tel:+998956992040" class="btn btn-outline-danger">
+                        <i class="bi bi-telephone-fill"></i> Qo‘ng‘iroq qilish
+                    </a>
+                    <button type="button" class="btn btn-outline-danger dropdown-toggle dropdown-toggle-split"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Boshqa usullar</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="tel:+998956992040"><i class="bi bi-telephone me-2"></i>Telefon</a></li>
+                        <li><a class="dropdown-item" href="https://t.me/" target="_blank" rel="noopener"><i class="bi bi-telegram me-2"></i>Telegram</a></li>
+                        <li><a class="dropdown-item" href="mailto:info@redcar.uz"><i class="bi bi-envelope me-2"></i>Email</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-8">
+                <div class="card">
+                    <div class="card-header fw-bold"><i class="bi bi-pencil-square me-1"></i> Buyurtma formasi</div>
+                    <div class="card-body">
+
+                        <!-- novalidate: tekshiruvni Bootstrap (JS) o'zi boshqaradi -->
+                        <form id="bookingForm" class="needs-validation" novalidate>
+                            <div class="row g-3">
+
+                                <!-- [4] form-floating: yorliq maydon ichida suzib turadi -->
+                                <div class="col-12 col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="fName" name="name"
+                                               placeholder="Ismingiz" required minlength="2">
+                                        <label for="fName">Ismingiz</label>
+                                        <div class="invalid-feedback">Iltimos, ismingizni kiriting (kamida 2 harf).</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-floating">
+                                        <input type="tel" class="form-control" id="fPhone" name="phone"
+                                               placeholder="+998 90 123 45 67" required pattern="[+0-9\s\-]{9,17}">
+                                        <label for="fPhone">Telefon</label>
+                                        <div class="invalid-feedback">Telefon raqamini to‘g‘ri kiriting.</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="bookingCar" name="car" required>
+                                            <option value="">Tanlang</option>
+                                            <option>Kia K5</option>
+                                            <option>Chevrolet Malibu</option>
+                                            <option>Chevrolet Cobalt</option>
+                                            <option>Chevrolet Tracker</option>
+                                            <option>Chevrolet Onix</option>
+                                            <option>Chevrolet Equinox</option>
+                                        </select>
+                                        <label for="bookingCar">Avtomobil</label>
+                                        <div class="invalid-feedback">Avtomobilni tanlang.</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-md-3">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control" id="bookingDate" name="date" required>
+                                        <label for="bookingDate">Sana</label>
+                                        <div class="invalid-feedback">Sanani tanlang.</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-md-3">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="fDays" name="days"
+                                               min="1" max="60" value="1" required>
+                                        <label for="fDays">Kun soni</label>
+                                        <div class="invalid-feedback">1 dan 60 gacha.</div>
+                                    </div>
+                                </div>
+
+                                <!-- [4] form-check: radio tugmalar -->
+                                <div class="col-12 col-md-6">
+                                    <label class="form-label d-block">Xizmat turi</label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="service" id="srv1" value="O‘zim haydayman" checked>
+                                        <label class="form-check-label" for="srv1">O‘zim haydayman</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="service" id="srv2" value="Haydovchi bilan">
+                                        <label class="form-check-label" for="srv2">Haydovchi bilan</label>
+                                    </div>
+                                </div>
+
+                                <!-- [4] form-switch va form-range -->
+                                <div class="col-12 col-md-6">
+                                    <div class="form-check form-switch mb-2">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="childSeat" name="childSeat">
+                                        <label class="form-check-label" for="childSeat">Bolalar o‘rindig‘i kerak</label>
+                                    </div>
+                                    <label for="passengers" class="form-label mb-0">
+                                        Yo‘lovchilar soni: <span id="passengersValue" class="fw-bold text-danger">2</span>
+                                    </label>
+                                    <input type="range" class="form-range" min="1" max="5" value="2" id="passengers" name="passengers">
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" id="fMessage" name="message"
+                                                  placeholder="Izohingiz" style="height: 90px"></textarea>
+                                        <label for="fMessage">Qo‘shimcha izoh</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="agree" required>
+                                        <label class="form-check-label" for="agree">Ijara shartlari bilan roziman</label>
+                                        <div class="invalid-feedback">Davom etish uchun rozilik bering.</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <!-- [8] Tooltip tugmada -->
+                                    <button class="btn btn-danger btn-lg" type="submit"
+                                            data-bs-toggle="tooltip" data-bs-title="Operator siz bilan bog‘lanadi">
+                                        So‘rovni yuborish <i class="bi bi-send"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Muvaffaqiyat xabari -->
+                        <div class="alert alert-success mt-3 d-none" id="formMessage" role="alert"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- [5] MEDIA: video, audio, xarita + ikonkalar             -->
+<!-- ====================================================== -->
+<section class="py-5" id="media">
+    <div class="container">
+        <div class="text-center mb-4">
+            <p class="text-danger fw-bold text-uppercase small mb-1">Media</p>
+            <h2 class="fw-bold">Video, audio va <span class="text-danger">rasmlar</span></h2>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Video: ratio — nisbatni saqlaydi, ekranga moslashadi -->
+            <div class="col-12 col-lg-7">
+                <div class="card h-100">
+                    <div class="card-header"><i class="bi bi-camera-video me-1"></i> Avtomobillarimiz videosi</div>
+                    <div class="card-body">
+                        <div class="ratio ratio-16x9">
+                            <video controls preload="metadata" class="rounded">
+                                <source src="video/car.mp4" type="video/mp4">
+                                Brauzeringiz videoni qo‘llab-quvvatlamaydi.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio + rasm turlari -->
+            <div class="col-12 col-lg-5">
+                <div class="card mb-4">
+                    <div class="card-header"><i class="bi bi-music-note-beamed me-1"></i> Sayohat uchun musiqa</div>
+                    <div class="card-body">
+                        <audio controls class="w-100">
+                            <source src="audio/music.mp3" type="audio/mpeg">
+                            Brauzeringiz audio faylni qo‘llab-quvvatlamaydi.
+                        </audio>
+                    </div>
+                </div>
+
+                <!-- Rasm dizayni: rounded, rounded-circle, img-thumbnail -->
+                <div class="card">
+                    <div class="card-header"><i class="bi bi-images me-1"></i> Rasm turlari</div>
+                    <div class="card-body">
+                        <div class="row g-2 text-center">
+                            <div class="col-4">
+                                <img src="images/onix.jpg" class="img-fluid rounded" alt="Yumaloq burchakli rasm">
+                                <small class="text-body-secondary">rounded</small>
+                            </div>
+                            <div class="col-4">
+                                <img src="images/cobalt.jpg" class="img-fluid img-thumbnail" alt="Ramkali rasm">
+                                <small class="text-body-secondary">thumbnail</small>
+                            </div>
+                            <div class="col-4">
+                                <img src="images/tracker.jpg" class="img-fluid rounded-circle avatar-img" alt="Doira shaklidagi rasm">
+                                <small class="text-body-secondary">circle</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Xarita (Google Maps) -->
+        <div class="card mt-4" id="location">
+            <div class="card-header"><i class="bi bi-geo-alt-fill text-danger me-1"></i> Bizning manzil — Samarqand</div>
+            <div class="card-body">
+                <div class="ratio ratio-21x9">
+                    <iframe src="https://www.google.com/maps?q=Samarkand,Uzbekistan&output=embed"
+                            loading="lazy" allowfullscreen title="Samarqand xaritasi"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- MIJOZLAR FIKRI — [10] ikkinchi slayder                  -->
+<!-- ====================================================== -->
+<section class="py-5 bg-body-tertiary">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-4">Mijozlar <span class="text-danger">fikri</span></h2>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner text-center px-5">
+                        <div class="carousel-item active">
+                            <p class="fs-5 fst-italic">“Kia K5 juda qulay va toza edi. Bron qilish ham oson bo‘ldi.”</p>
+                            <p class="text-danger mb-0"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></p>
+                            <small class="text-body-secondary">— Jasur, Toshkent</small>
+                        </div>
+                        <div class="carousel-item">
+                            <p class="fs-5 fst-italic">“Haydovchi bilan ijara — Samarqandni ko‘rish uchun eng yaxshi usul.”</p>
+                            <p class="text-danger mb-0"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></p>
+                            <small class="text-body-secondary">— Malika, Buxoro</small>
+                        </div>
+                        <div class="carousel-item">
+                            <p class="fs-5 fst-italic">“Narxlar hamyonbop, xizmat 24/7. Tavsiya qilaman!”</p>
+                            <p class="text-danger mb-0"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></p>
+                            <small class="text-body-secondary">— Bobur, Samarqand</small>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Oldingi</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Keyingi</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ====================================================== -->
+<!-- [9] ACCORDION (panel) — SAVOL-JAVOB                     -->
+<!-- ====================================================== -->
+<section class="py-5" id="faq">
+    <div class="container" style="max-width: 900px;">
+        <p class="text-danger fw-bold text-uppercase small mb-1">Savol-javob</p>
+        <h2 class="fw-bold mb-3">Ko‘p beriladigan <span class="text-danger">savollar</span></h2>
+
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h3 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                        Avtomobilni qanday band qilaman?
+                    </button>
+                </h3>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Bron formasini to‘ldiring yoki telefon orqali bog‘laning.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h3 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                        Haydovchi bilan ijaraga olish mumkinmi?
+                    </button>
+                </h3>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">Ha, bron formasida “Haydovchi bilan” xizmatini tanlang.</div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h3 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                        To‘lov qanday amalga oshiriladi?
+                    </button>
+                </h3>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">To‘lov avtomobilni qabul qilishda, naqd yoki karta orqali amalga oshiriladi.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- ====================================================== -->
+<!-- FOOTER                                                  -->
+<!-- ====================================================== -->
+<footer class="py-4 bg-black border-top border-danger-subtle">
+    <div class="container">
+        <div class="row align-items-center gy-3 text-center text-md-start">
+            <div class="col-12 col-md-4">
+                <a class="navbar-brand fw-black" href="#home"><i class="bi bi-car-front-fill text-danger"></i> RED<span class="text-danger">CAR</span></a>
+                <p class="small text-body-secondary mb-0">Samarqandda avtomobil ijarasi</p>
+            </div>
+            <div class="col-12 col-md-4 text-center">
+                <a class="link-secondary text-decoration-none me-3" href="#cars">Avtomobillar</a>
+                <a class="link-secondary text-decoration-none me-3" href="#prices">Narxlar</a>
+                <a class="link-secondary text-decoration-none" href="#booking">Bron qilish</a>
+            </div>
+            <div class="col-12 col-md-4 text-md-end">
+                <a class="link-secondary text-decoration-none d-block" href="tel:+998956992040"><i class="bi bi-telephone me-1"></i>+998 95 699 20 40</a>
+                <small class="text-body-secondary">© 2026 RED CAR. Barcha huquqlar himoyalangan.</small>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Tepaga qaytish tugmasi -->
+<a class="btn btn-danger rounded-circle to-top" href="#home" aria-label="Tepaga">
+    <i class="bi bi-arrow-up"></i>
+</a>
+
+<!-- Bootstrap JS (dropdown, carousel, tooltip, popover, accordion, collapse uchun shart) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bizning JavaScript -->
+<script src="script.js"></script>
+</body>
+</html>
